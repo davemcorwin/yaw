@@ -1,0 +1,82 @@
+/**
+ * Body CSS
+ */
+html,
+body {
+  height: 100%;
+}
+
+html,
+body,
+input,
+textarea,
+buttons {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
+}
+
+
+/**
+ * Header CSS
+ */
+header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 2;
+}
+
+header a {
+  text-decoration: none;
+  color: #eee;
+}
+
+header a:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+/**
+ * Content CSS
+ */
+#content-wrapper {
+  min-height: 100%;
+  margin-top: 3rem;
+
+  /* sticky footer */
+  /*margin-bottom: -100px;*/
+  padding-bottom: 100px;
+}
+
+
+/**
+ * Footer CSS
+ */
+footer {
+  height: 100px;
+  background-color: #eee;
+  border-top: 1px solid #e0e0e0;
+  padding-top: 35px;
+}
+
+/**
+ * General
+ */
+
+.hoverable:hover {
+  box-shadow: 0 3px 6px rgba(0,0,0,.16),0 3px 6px rgba(0,0,0,.23);
+}
+
+.epic-cards {
+  margin-top: 3rem;
+}
+
+.epic-card {
+  border-radius: 15px;
+}
+
+.feature-cards {
+  margin-left: 4rem;
+}
