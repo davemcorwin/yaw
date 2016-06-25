@@ -14,7 +14,8 @@
   "dependencies": {
     "babel-preset-stage-0": "^6.5.0",
     "chart.js": "^2.1.6",
-    "choo": "^2.3.0"
+    "choo": "^2.3.0",
+    "lodash": "^4.13.1"
   },
   "devDependencies": {
     "auto-reload-brunch": "^2.0.0",
