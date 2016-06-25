@@ -27,7 +27,7 @@ export default (params, state, send) =>  {
             </div>
           </div>
           <div class="epic-cards">
-            ${epics.map(epic => epicCard(epic, state, send))}
+            ${epics.map(epic => epicCard({epic, project}, state, send))}
           </div>
           <button class="mui-btn mui-btn--fab mui-btn--primary mui--pull-right">+</button>
         </main>
@@ -43,9 +43,9 @@ export default (params, state, send) =>  {
   `
 }
 
-const epicCard = (params, state, send) => {
+const epicCard = ({epic, project}, state, send) => {
   const features = state.feature.features
-    .filter(feature => feature.epic === params.id)
+    .filter(feature => feature.epic === epic.id)
     .sort((a,b) => a.id - b.id)
   const epicScore = features.reduce((total, feature) => total + feature.score, 0)
   return choo.view`
@@ -54,7 +54,7 @@ const epicCard = (params, state, send) => {
         <div class="mui-panel hoverable epic-card">
           <div class="mui-row">
             <div class="mui-col-xs-10">
-              <span class="mui--text-display1">${params.name}</span>
+              <span class="mui--text-display1">${epic.name}</span>
             </div>
             <div class="mui-col-xs-2 mui--text-right">
               <span class="mui--text-display1">${epicScore}</span>
@@ -63,28 +63,34 @@ const epicCard = (params, state, send) => {
           <div class="feature-cards">
             ${features.map(feature => featureCard(feature, state, send))}
           </div>
-          <button class="mui-btn mui-btn--flat mui-btn--primary mui--pull-right">Add</button>
+          <button class="mui-btn mui-btn--flat mui-btn--primary mui--pull-right" onclick=${() => send('feature:add', { payload: { project: project.id, epic: epic.id } })}>Add</button>
         </div>
       </div>
     </div>
   `
 }
 
-const featureCard = (params, state, send) => {
+const featureCard = (feature, state, send) => {
 
-  const _updateFeature = score =>
-    send('feature:update', { id: params.id, score: Number(score || 0) })
+  const _updateFeature = attrs =>
+    send('feature:update', { payload: { ...feature, ...attrs } })
 
   const updateFeature = _.debounce(_updateFeature, 300)
 
   return choo.view`
-    <div class="mui-row">
-      <div class="mui-col-xs-8">${params.name}</div>
+    <div class="mui-row feature-row">
+      <div class="mui-col-xs-8">
+        <input
+          type="text"
+          oninput=${e => updateFeature({name: e.currentTarget.value})}
+          value=${feature.name}/>
+      </div>
       <div class="mui-col-xs-4">
         <input
-          type="number"
-          oninput=${e => updateFeature(e.currentTarget.value)}
-          value=${params.score}/>
+          class="mui--pull-right mui--text-center right"
+          type="text"
+          oninput=${e => updateFeature({score: Number(e.currentTarget.value || 0)})}
+          value=${feature.score}/>
       </div>
     </div>
   `

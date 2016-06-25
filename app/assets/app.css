@@ -79,4 +79,31 @@ footer {
 
 .feature-cards {
   margin-left: 4rem;
+  padding-right: 4rem;
+}
+
+.feature-row {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.feature-row:hover {
+  background-color: #eeeeee;
+}
+
+.feature-row input {
+  border: none;
+  background-color: transparent;
+}
+
+.feature-row input.right{
+  width: 4rem;
+}
+
+.feature-row input:focus {
+  outline: none;
+}
+
+.feature-row:hover input {
+  border-bottom: 1px solid blue;
 }
