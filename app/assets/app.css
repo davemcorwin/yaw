@@ -78,6 +78,7 @@ footer {
 }
 
 .feature-cards {
+  margin-top: 2rem;
   margin-left: 4rem;
   padding-right: 4rem;
 }
@@ -87,13 +88,13 @@ footer {
   padding-bottom: 1rem;
 }
 
-.feature-row:hover {
-  background-color: #eeeeee;
-}
-
 .feature-row input {
   border: none;
   background-color: transparent;
+}
+
+.feature-row input.left{
+  width:100%;
 }
 
 .feature-row input.right{
@@ -105,5 +106,33 @@ footer {
 }
 
 .feature-row:hover input {
-  border-bottom: 1px solid blue;
+  margin-bottom: -1px;
+  border-bottom: 1px solid #dddddd;
+}
+
+.feature-row input:focus {
+  margin-bottom: -1px;
+  border-bottom: 1px solid #dddddd;
+}
+
+.delete-link {
+  color: red;
+  text-decoration: none;
+}
+
+.feature-row:not(:hover) .delete-link {
+  display: none;
+}
+
+.epic-card:not(:hover) .delete-link {
+  display: none;
+  margin-bottom: 1rem;
+}
+
+.delete-link-wrapper {
+  min-height: 1rem;
+}
+
+.feature-add {
+  /*margin-right: -3.5rem;*/
 }

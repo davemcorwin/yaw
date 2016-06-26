@@ -1,25 +1,39 @@
+import _ from 'lodash'
+
+let epicId = 1
+const nextId = () => epicId++
+
 export default {
   namespace: 'epic',
   state: {
     epics: [
       {
-        id: 1,
+        id: nextId(),
         project: 1,
-        slug: 'user-management',
         name: 'User Management'
       },
       {
-        id: 2,
+        id: nextId(),
         project: 1,
-        slug: 'onboarding',
         name: 'Onboarding'
       },
       {
-        id: 3,
+        id: nextId(),
         project: 1,
-        slug: 'dashboard',
         name: 'Dashboard'
       }
     ]
+  },
+  reducers: {
+    update: ({ payload: { id, ...attrs } }, state) => {
+      const epic = _.remove(state.epics, { id: id })[0]
+      return { ...state, epics: [ ...state.epics, { ...epic, ...attrs } ] }
+    },
+    add: ({ payload }, state) => {
+      return { ...state, epics: _.concat(state.epics, { id: nextId(), ...payload, name: 'New Epic' }) }
+    },
+    delete: ({ payload: { id } }, state) => {
+      return { ...state, epics: _.reject(state.epics, { id: id }) }
+    }
   }
 }

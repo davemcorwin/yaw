@@ -78,7 +78,10 @@ export default {
       return { ...state, features: [ ...state.features, { ...feature, ...attrs } ] }
     },
     add: ({ payload }, state) => {
-      return { ...state, features: [ ...state.features, { id: nextId(), ...payload, name: 'New Feature', score: 0 } ] }
+      return { ...state, features: _.concat(state.features, { id: nextId(), ...payload, name: 'New Feature', score: 0 }) }
+    },
+    delete: ({ payload: { id } }, state) => {
+      return { ...state, features: _.reject(state.features, { id: id }) }
     }
   }
 }
