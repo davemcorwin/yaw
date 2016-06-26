@@ -1,4 +1,5 @@
 import choo from 'choo'
+import Chart from 'chart.js'
 
 export default (params) => {
 
