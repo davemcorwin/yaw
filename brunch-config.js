@@ -6,12 +6,17 @@ module.exports = {
         'app.js': /^app/
       }
     },
-    stylesheets: {joinTo: 'app.css'}
+    stylesheets: {
+      joinTo: 'app.css'
+    }
   },
 
   plugins: {
     babel: {
       presets: ['es2015', 'stage-0']
+    },
+    sass: {
+      mode: "native"
     }
   }
 };

@@ -1,9 +1,13 @@
+import { idGen } from '../utils'
+
+const nextId = idGen()
+
 export default {
   namespace: 'project',
   state: {
     projects: [
       {
-        id: 1,
+        id: nextId(),
         slug: 'cashup',
         name: 'CashUp',
         tags: [

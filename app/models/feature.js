@@ -1,7 +1,7 @@
 import _ from 'lodash'
+import { idGen } from '../utils'
 
-let featureId = 1
-const nextId = () => featureId++
+const nextId = idGen()
 
 export default {
   namespace: 'feature',

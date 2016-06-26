@@ -1,6 +1,7 @@
 import choo  from 'choo'
 import _     from 'lodash'
 import Chart from 'chart.js'
+import * as t from '../templates'
 
 const projectEpics = (state, project) => _
   .chain(state.epic.epics)
@@ -43,7 +44,7 @@ export default (params, state, send) =>  {
         </div>
         <div class="mui-col-xs-12 mui-col-lg-6">
           <div class="mui-panel epic-cards" style="width: 100%">
-            ${pieChart({name: 'foo', labels, data})}
+            ${t.pieChart({name: 'foo', labels, data})}
           </div>
         </div>
       </div>
@@ -85,7 +86,7 @@ const epicCard = ({epic, project}, state, send) => {
             </div>
           </div>
           <div class="feature-cards">
-            ${features.map(feature => featureCard(feature, state, send))}
+            ${features.map(feature => t.featureRow({ feature }, state, send))}
             <div class="mui-row">
               <div class="mui-col-xs-1 mui-col-xs-offset-11 feature-row">
                 <button class="mui-btn mui-btn--raised mui-btn--small mui--pull-right feature-add" onclick=${() => send('feature:add', { payload: { project: project.id, epic: epic.id } })}>Add</button>
@@ -96,69 +97,4 @@ const epicCard = ({epic, project}, state, send) => {
       </div>
     </div>
   `
-}
-
-const featureCard = (feature, state, send) => {
-
-  const _updateFeature = attrs =>
-    send('feature:update', { payload: { ...feature, ...attrs } })
-
-  const updateFeature = _.debounce(_updateFeature, 300)
-
-  const deleteFeature = () => send('feature:delete', { payload: { id: feature.id } })
-
-  return choo.view`
-    <div class="mui-row feature-row">
-      <div class="mui-col-xs-7">
-        <input
-          class="left"
-          type="text"
-          oninput=${e => updateFeature({name: e.currentTarget.value})}
-          tabindex="-1"
-          value=${feature.name}/>
-      </div>
-      <div class="mui-col-xs-4">
-        <input
-          class="mui--pull-right mui--text-right right"
-          type="text"
-          oninput=${e => updateFeature({score: Number(e.currentTarget.value || 0)})}
-          value=${feature.score}/>
-      </div>
-      <div class="mui-col-xs-1">
-        <a class="delete-link mui--text-button" href="#" onclick=${deleteFeature}>x</a>
-      </div>
-    </div>
-  `
-}
-
-const pieChart = (params) => {
-
-  const chartData = (labels, data) => ({
-    labels: labels,
-    datasets: [{
-      data: data,
-      backgroundColor: [
-          "#FF6384",
-          "#36A2EB",
-          "#FFCE56"
-      ],
-      hoverBackgroundColor: [
-          "#FF6384",
-          "#36A2EB",
-          "#FFCE56"
-      ]
-    }]
-  })
-
-  const chart = () => {
-    new Chart(
-      document.getElementById(params.name),
-      { type: 'pie', data: chartData(params.labels, params.data) }
-    )
-  }
-
-  // Hacky hack
-  setTimeout(chart, 50)
-
-  return choo.view`<canvas id=${params.name}></canvas>`
 }

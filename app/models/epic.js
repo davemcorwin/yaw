@@ -1,7 +1,7 @@
 import _ from 'lodash'
+import { idGen } from '../utils'
 
-let epicId = 1
-const nextId = () => epicId++
+const nextId = idGen()
 
 export default {
   namespace: 'epic',
