@@ -3,6 +3,8 @@ import _ from 'lodash'
 
 export default ({ feature }, __, send) => {
 
+  const onload = require('on-load')
+
   const _updateFeature = attrs =>
     send('feature:update', { payload: { ...feature, ...attrs } })
 
@@ -12,15 +14,21 @@ export default ({ feature }, __, send) => {
   const updateScore = e => updateFeature({score: Number(e.currentTarget.value || 0)})
   const deleteFeature = () => send('feature:delete', { payload: { id: feature.id } })
 
+  const nameInput = choo.view`
+    <input
+      class="left"
+      type="text"
+      oninput=${updateName}
+      tabindex="-1"
+      value=${feature.name}/>
+  `
+
+  onload(nameInput, () => nameInput.focus())
+
   return choo.view`
     <div class="mui-row feature-row">
       <div class="mui-col-xs-7">
-        <input
-          class="left"
-          type="text"
-          oninput=${updateName}
-          tabindex="-1"
-          value=${feature.name}/>
+        ${nameInput}
       </div>
       <div class="mui-col-xs-4">
         <input
