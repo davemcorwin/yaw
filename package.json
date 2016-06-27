@@ -14,7 +14,8 @@
   "dependencies": {
     "chart.js": "^2.1.6",
     "choo": "^2.3.0",
-    "lodash": "^4.13.1"
+    "lodash": "^4.13.1",
+    "on-load": "^2.1.1"
   },
   "devDependencies": {
     "auto-reload-brunch": "^2.0.0",
