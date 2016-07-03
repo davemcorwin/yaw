@@ -21,35 +21,34 @@ export default ({epic, project}, state, send) => {
   const deleteEpic = () => send('epic:delete', { payload: { id: epic.id } })
 
   return choo.view`
-    <div class="mui-row">
-      <div class="mui-col-xs-12">
-        <div class="mui-panel hoverable epic-card">
-          <div class="delete-link-wrapper">
-            <a class="delete-link mui--text-button mui--pull-right" href="#" onclick=${deleteEpic}>x</a>
+    <div class="card epic-card">
+      <div class="container">
+        <div class="delete-link-wrapper">
+          <a class="delete-link" href="#" onclick=${deleteEpic}>x</a>
+        </div>
+        <div class="row">
+          <div class="column column-90">
+            <input
+              class="editable"
+              type="text"
+              oninput=${updateName}
+              tabindex="-1"
+              value=${epic.name}/>
           </div>
-          <div class="mui-row feature-row">
-            <div class="mui-col-xs-9">
-              <input
-                class="mui--text-headline left"
-                type="text"
-                oninput=${updateName}
-                tabindex="-1"
-                value=${epic.name}/>
-            </div>
-            <div class="mui-col-xs-3 mui--text-right">
-              <span class="mui--text-headline">${epicScore}</span>
-            </div>
+          <div class="column column-10">
+            <span>${epicScore}</span>
           </div>
-          <div class="feature-cards">
-            ${features.map(feature => featureRow({ feature }, state, send))}
-            <div class="mui-row">
-              <div class="mui-col-xs-1 mui-col-xs-offset-11 feature-row">
-                <button class="mui-btn mui-btn--raised mui-btn--small mui--pull-right feature-add" onclick=${addFeature}>Add</button>
-              </div>
-            </div>
+        </div>
+
+        ${features.map(feature => featureRow({ feature }, state, send))}
+
+        <div class="row">
+          <div class="add-button column">
+            <button class="button button-clear" onclick=${addFeature}>Add</button>
           </div>
         </div>
       </div>
+
     </div>
   `
 }

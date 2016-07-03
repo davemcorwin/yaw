@@ -1,0 +1,23 @@
+.tab-row{
+  text-align: center;
+
+  a.tab-link{
+    cursor: pointer;
+    color: $primary-color;
+    height: 5rem;
+    display: block;
+    padding: 1rem;
+    font-weight: 500;
+    &.active{
+      background-color: $accent-color;
+    }
+    &:hover{
+      color: $primary-color-light;
+    }
+  }
+}
+
+.tab-content{
+  background-color: $accent-color;
+  height: 300px;
+}

@@ -1,3 +1,5 @@
 export { default as epicCard } from './epic-card'
 export { default as featureRow } from './feature-row'
 export { default as pieChart } from './pie-chart'
+export { default as nav } from './nav'
+export { default as sideNav } from './side-nav'

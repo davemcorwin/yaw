@@ -1,9 +1,8 @@
 import choo from 'choo'
 import _ from 'lodash'
+import { onload } from '../utils'
 
 export default ({ feature }, __, send) => {
-
-  const onload = require('on-load')
 
   const _updateFeature = attrs =>
     send('feature:update', { payload: { ...feature, ...attrs } })
@@ -14,37 +13,33 @@ export default ({ feature }, __, send) => {
   const updateScore = e => updateFeature({score: Number(e.currentTarget.value || 0)})
   const deleteFeature = () => send('feature:delete', { payload: { id: feature.id } })
 
-  const nameInput = choo.view`
-    <input
-      class="left"
-      type="text"
-      oninput=${updateName}
-      tabindex="-1"
-      value=${feature.name}/>
-  `
-
-  onload(nameInput, () => nameInput.focus())
-
-  return choo.view`
-    <div class="mui-row feature-row">
-      <div class="mui-col-xs-7">
-        ${nameInput}
-      </div>
-      <div class="mui-col-xs-4">
+  return onload(choo.view`
+    <div class="row">
+      <div class="column column-70">
         <input
-          class="mui--pull-right mui--text-right right"
+          class="editable left"
+          type="text"
+          oninput=${updateName}
+          tabindex="-1"
+          value=${feature.name}/>
+      </div>
+      <div class="column column-20">
+        <input
+          class="editable"
           type="text"
           oninput=${updateScore}
           value=${feature.score}/>
       </div>
-      <div class="mui-col-xs-1">
+      <div class="column column-10">
         <a
-          class="delete-link mui--text-button"
+          class="delete-link"
           href="#"
           onclick=${deleteFeature}>
           x
         </a>
       </div>
     </div>
-  `
+  `,
+  tree => tree.querySelector('input.left').focus()
+  )
 }

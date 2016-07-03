@@ -10,9 +10,13 @@ export default {
         id: nextId(),
         slug: 'cashup',
         name: 'CashUp',
-        tags: [
-          'owner', 'admin', 'app', 'api', 'dw'
-        ]
+        stage: 'scoping'
+      },
+      {
+        id: nextId(),
+        slug: 'wilson',
+        name: 'Wilson',
+        stage: 'scoping'
       }
     ],
   }
