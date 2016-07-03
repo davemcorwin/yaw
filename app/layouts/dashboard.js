@@ -5,11 +5,12 @@ import appLayout from './app'
 
 export default child => appLayout((params, state, send) => {
 
-  console.log(state.app.location)
-
   const projects = state.project.projects
   const stages = ['scoping', 'planning', 'allocating', 'reviewing']
-  const navStage = _.split(state.app.location, '/')[-1]
+  const navStage = _.chain(state.app.location)
+                    .split('/')
+                    .last()
+                    .value() || 'scoping'
 
   return choo.view`
     <div class="dashboard-view">
@@ -17,7 +18,7 @@ export default child => appLayout((params, state, send) => {
       <section class="row tab-row">
         ${_.map(stages, stage => choo.view`
           <div class="column">
-            <a href="/projects/${stage}" class="tab-link ${classnames({'active': navStage === stage})}">
+            <a href="/dashboard/${stage}" class="tab-link ${classnames({'active': navStage === stage})}">
               ${_.capitalize(stage)} (${_.filter(projects, { stage }).length})
             </a>
           </div>

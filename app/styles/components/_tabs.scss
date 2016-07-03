@@ -1,5 +1,10 @@
 .tab-row{
   text-align: center;
+  padding: 0px 10px 0px 10px;
+
+  .column{
+    padding: 0px;
+  }
 
   a.tab-link{
     cursor: pointer;
@@ -8,9 +13,17 @@
     display: block;
     padding: 1rem;
     font-weight: 500;
+    border-bottom: 1px solid $primary-border-color;
+    background-color: $drawer-background-color;
+
     &.active{
-      background-color: $accent-color;
+      background-color: $primary-background-color;
+      border-bottom: none;
+      border-right: 1px solid $primary-border-color;
+      border-left: 1px solid $primary-border-color;
+      border-top: 1px solid $primary-border-color;
     }
+
     &:hover{
       color: $primary-color-light;
     }
@@ -18,6 +31,9 @@
 }
 
 .tab-content{
-  background-color: $accent-color;
+  background-color: $primary-background-color;
   height: 300px;
+  border-right: 1px solid $primary-border-color;
+  border-left: 1px solid $primary-border-color;
+  border-bottom: 1px solid $primary-border-color;
 }

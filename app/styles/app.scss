@@ -38,13 +38,14 @@
 }
 
 .card{
-  background-color: white;
-  box-shadow: 0 2px 2px 0 #ccc,
-              0 0px 2px 0 #ddd;
+  background-color: $secondary-background-color;
+  border: 1px solid $primary-border-color;
+  box-shadow: 0 2px 2px 0 #222,
+              0 0px 2px 0 #333;
   margin: 2rem;
   &:hover{
-    box-shadow: 0 3px 6px #ccc,
-                0 3px 6px #ddd;
+    box-shadow: 0 3px 6px #222,
+                0 3px 6px #333;
   }
 }
 
