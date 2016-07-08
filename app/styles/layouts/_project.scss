@@ -1,30 +1,55 @@
-.project-layout {
-  aside{
-    position: fixed;
-    width: 150px;
-    height: 100%;
+.project-view{
 
-    a{
-      cursor: pointer;
-      color: $primary-color;
-      height: 5rem;
-      display: block;
-      padding: 1rem;
-      font-weight: 500;
-      &.active{
-        background-color: $accent-color;
-      }
-      &:hover{
-        color: $primary-color-light;
-      }
-    }
+  .project-header{
+    margin-bottom: 1rem;
   }
 
-  main{
-    margin-left: 150px;
-    padding: 2rem;
-    background-color: $accent-color;
-    overflow: scroll;
-    height: 488px;
+  height: 98%;
+
+  .project-container{
+    display: flex;
+    flex-flow: row nowrap;
+    height: 90%;
+
+    aside{
+      flex-basis: 15rem;
+
+      display: flex;
+      flex-flow: column nowrap;
+
+      .filler{
+        flex: 2;
+        border-right: 1px solid $primary-border-color;
+      }
+
+      a{
+        flex-basis: 4rem;
+        cursor: pointer;
+        color: $primary-color;
+        padding: 1rem;
+        font-weight: 500;
+        border-right: 1px solid $primary-border-color;
+        background-color: $drawer-background-color;
+
+        &.active{
+          background-color: $primary-background-color;
+          border: 1px solid $primary-border-color;
+          border-right: none;
+        }
+
+        &:hover{
+          color: $primary-color-light;
+        }
+      }
+    }
+
+    main{
+      flex: 2;
+      padding: 1rem;
+      background-color: $primary-background-color;
+      overflow: scroll;
+      border: 1px solid $primary-border-color;
+      border-left: none;
+    }
   }
 }

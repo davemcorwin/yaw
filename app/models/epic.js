@@ -10,17 +10,20 @@ export default {
       {
         id: nextId(),
         project: 1,
-        name: 'User Management'
+        name: 'User Management',
+        slug: 'user-management'
       },
       {
         id: nextId(),
         project: 1,
-        name: 'Onboarding'
+        name: 'Onboarding',
+        slug: 'onboarding'
       },
       {
         id: nextId(),
         project: 1,
-        name: 'Dashboard'
+        name: 'Dashboard',
+        slug: 'dashboard'
       }
     ]
   },

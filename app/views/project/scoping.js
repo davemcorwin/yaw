@@ -25,30 +25,42 @@ export default (params, state, send) => {
   const data = epics.map(epic => epicTotal(state, epic))
 
   const addEpic = () => send('epic:add', { payload: { project: project.id } })
+  const selectedEpic = _.first(epics)
 
   return choo.view`
-    <div class="mui-row">
-      <div class="mui-col-xs-10">
-        <div class="mui--text-display2 mui--text-right">${projectScore}</div>
-        <div class="tab-content">
-          <div class="flex-container">
-            ${epics.map(epic => t.epicCard({epic, project}, state, send))}
-          </div>
-        </div>
-        <div class="mui-row">
-          <div class="mui-col-xs-12 mui-col-lg-6">
-            <div class="epic-cards">
-
-            </div>
-            <button class="mui-btn mui-btn--fab mui-btn--primary mui--pull-right" onclick=${addEpic}>+</button>
-          </div>
-          <div class="mui-col-xs-12 mui-col-lg-6">
-            <div class="mui-panel epic-cards" style="width: 100%">
-              ${t.pieChart({name: 'foo', labels, data})}
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="scoping-view">
+      <section class="epic-list-container">
+        <h5>Epics</h5>
+        ${_.map(epics, epic => choo.view`<a href="#">${epic.name}</a>`)}
+        <a class="add-epic" href="#">+</a>
+      </section>
+      <section class="epic-detail-container">
+        ${t.epicCard({selectedEpic, project}, state, send)}
+      </section>
     </div>
-    `
+  `
+    // <div class="mui-row">
+    //   <div class="mui-col-xs-10">
+    //     <div class="mui--text-display2 mui--text-right">${projectScore}</div>
+    //     <div class="tab-content">
+    //       <div class="flex-container">
+    //         ${epics.map(epic => t.epicCard({epic, project}, state, send))}
+    //       </div>
+    //     </div>
+    //     <div class="mui-row">
+    //       <div class="mui-col-xs-12 mui-col-lg-6">
+    //         <div class="epic-cards">
+    //
+    //         </div>
+    //         <button class="mui-btn mui-btn--fab mui-btn--primary mui--pull-right" onclick=${addEpic}>+</button>
+    //       </div>
+    //       <div class="mui-col-xs-12 mui-col-lg-6">
+    //         <div class="mui-panel epic-cards" style="width: 100%">
+    //           ${t.pieChart({name: 'foo', labels, data})}
+    //         </div>
+    //       </div>
+    //     </div>
+    //   </div>
+    // </div>
+    // `
 }

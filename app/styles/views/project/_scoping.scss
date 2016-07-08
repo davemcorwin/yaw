@@ -1,0 +1,25 @@
+.scoping-view{
+  display: flex;
+  flex-flow: row nowrap;
+
+  .epic-list-container{
+    flex-basis: 20rem;
+
+    a{
+      display: block;
+
+      &.active{
+        text-decoration: underline;
+        // background-color: $primary-background-color;
+      }
+    }
+  }
+
+  .epic-detail-container{
+    flex: 2;
+    // margin-top: 6rem;
+    padding: 1rem;
+    background-color: $drawer-background-color;
+    border: 1px solid $primary-border-color;
+  }
+}

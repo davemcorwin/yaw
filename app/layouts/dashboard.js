@@ -11,6 +11,7 @@ export default child => appLayout((params, state, send) => {
                     .split('/')
                     .last()
                     .value() || 'scoping'
+  const stageProjects = _.filter(projects, { stage: navStage })
 
   return choo.view`
     <div class="dashboard-view">
@@ -27,7 +28,7 @@ export default child => appLayout((params, state, send) => {
 
       <main class="tab-content">
         <div class="flex-container">
-          ${_.map(projects, projectCard)}
+          ${_.map(stageProjects, projectCard)}
         </div>
       </main>
     </div>

@@ -1,33 +1,30 @@
 import choo from 'choo'
 import classnames from 'classnames'
 import _ from 'lodash'
-import appLayout from './app'
+import * as p from '../project'
 
-export default child => appLayout((params, state, send) => {
-
-  const project = _.find(state.project.projects, { slug: params.project })
-  const stages = ['scoping', 'planning', 'allocating', 'reviewing']
-  const navStage = _.split(state.app.location, '/')[-1]
-
-  return choo.view`
+export default ({ project, stage, child }, state, send) => choo.view`
     <div class="project-view">
 
-      <h2 class="project-header">${project.name}</h2>
+      <h3 class="project-header">${project.name}</h3>
 
-      <aside>
-        ${_.map(stages, stage => choo.view`
-          <a
-            href="/projects/${project.slug}/${stage}"
-            class="${classnames({'active': navStage === stage})}">
+      <div class="project-container">
 
-            ${_.capitalize(stage)}
-          </a>
-        `)}
-      </aside>
+        <aside>
+          ${_.map(_.keys(p), stg => choo.view`
+            <a
+              href="/projects/${project.slug}/${stg}"
+              class="${classnames({'active': stage === stg})}">
 
-      <main>
-        ${child({ ...params, project }, state, send)}
-      </main>
+              ${_.capitalize(stg)}
+            </a>
+          `)}
+          <div class="filler"> </div>
+        </aside>
+
+        <main>
+          ${child({ ...params, project }, state, send)}
+        </main>
+      </div>
     </div>
   `
-})

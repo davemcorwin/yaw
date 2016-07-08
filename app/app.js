@@ -25,16 +25,27 @@ export default function() {
         route('/reviewing',  l.dashboard())
       ]),
       route('/projects',     l.project(p.scoping), [
-        route('/:project',     l.project(p.scoping), [
-          route('/scoping',    l.project(p.scoping)),
-          route('/planning',   l.project(p.planning)),
-          route('/allocating', l.project(p.allocating)),
-          route('/reviewing',  l.project(p.reviewing))
-        ])
+        route('/:project/:stage', projectStageHandler, [
+          route('/:epic', projectEpicHandler)
       ])
     ]),
     route('/404', v.fourohfour)
   ])
+
+  // Route handlers
+  const projectStageHandler = (params, state, send) => {
+    const project = _.find(state.project.projects, { slug: params.project })
+    const stage = params.stage || 'scoping'
+    const view = p[stage]
+
+    if (!project || !view)
+      return v.fourohfour(params, state, send)
+
+    return withLayout(view, { ...params, project, stage }, state, send, [l.app, l.project])
+  }
+
+  // const projectEpic = (params, state, send) =>
+
 
   // Return the app
   return app.start()
